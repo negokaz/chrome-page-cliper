@@ -10,8 +10,8 @@ function createContextMenu() {
   };
 
   chrome.contextMenus.create({
-    "id": "generate-page",
-    "title": "Generate Single Page",
+    "id": "clip-page",
+    "title": "Clip as single HTML file",
     "type": "normal",
     "contexts": ["selection"],
     "onclick": onClickContextMenu
@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener(({method, value, title}) => {
 		return;
 	}
   chrome.tabs.create({
-    "url": chrome.extension.getURL("view/page-generator.html")
+    "url": chrome.extension.getURL("view/preview.html")
   });
   chrome.runtime.onMessage.addListener(({event}) => {
     if (event !== "opened") {
