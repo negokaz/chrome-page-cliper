@@ -25,6 +25,7 @@
     $("img").each(function() {
       $(this).on('load', function() {
         replaceToBase64(this);
+        $(this).off("load");
       });
     });
     var html = document.querySelector("#content").innerHTML;
