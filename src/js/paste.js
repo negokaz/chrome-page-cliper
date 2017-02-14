@@ -3,13 +3,17 @@
       var canvas = document.createElement('canvas');
       canvas.width  = img.naturalWidth;
       canvas.height = img.naturalHeight;
-      $.ajax({ url: img.src, type: "HEAD"}).done(function(data, textStatus, jqXHR) {
-        var mimeType = jqXHR.getResponseHeader('Content-Type');
-        var context = canvas.getContext('2d');
-        context.drawImage(img, 0, 0);
-        var base64 = canvas.toDataURL(mimeType);
-        img.src = base64;
-      });
+      $.ajax({ url: img.src, type: "HEAD"})
+        .done(function(data, textStatus, jqXHR) {
+          var mimeType = jqXHR.getResponseHeader('Content-Type');
+          var context = canvas.getContext('2d');
+          context.drawImage(img, 0, 0);
+          var base64 = canvas.toDataURL(mimeType);
+          img.src = base64;
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+        });
   }
 
   chrome.runtime.onMessage.addListener(function(data) {
