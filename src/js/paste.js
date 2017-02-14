@@ -16,6 +16,11 @@
     if (data.method !== "paste") {
       return;
     }
+
+    document.title = "Clipping: " + data.title;
+    var titleForm = $("#title_form");
+    titleForm.val(data.title);
+
     document.querySelector("#content").innerHTML = data.value;
     $("img").each(function() {
       $(this).on('load', function() {
@@ -26,6 +31,7 @@
     $("#download_html").on("click", function() {
     	var blob = new Blob([html], { type: "text/html" });
     	this.href = window.URL.createObjectURL(blob);
+      this.download = titleForm.val() + ".html";
     });
   });
 }

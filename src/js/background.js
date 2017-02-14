@@ -21,7 +21,7 @@ function createContextMenu() {
 chrome.runtime.onInstalled.addListener(createContextMenu);
 chrome.runtime.onStartup.addListener(createContextMenu);
 
-chrome.runtime.onMessage.addListener(({method, value}) => {
+chrome.runtime.onMessage.addListener(({method, value, title}) => {
 	if (method !== "copy") {
 		return;
 	}
@@ -32,6 +32,6 @@ chrome.runtime.onMessage.addListener(({method, value}) => {
     if (event !== "opened") {
       return;
     }
-    chrome.runtime.sendMessage({ method: "paste", value: value });
+    chrome.runtime.sendMessage({ method: "paste", value: value, title: title });
   });
 });
