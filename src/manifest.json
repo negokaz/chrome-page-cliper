@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Single Pager",
+  "name": "Page Cliper",
   "description": "選択領域をシングルページのHTMLとして保存します",
   "version": "0.1.0",
   "permissions": [
