@@ -32,8 +32,8 @@
         $(this).off("load");
       });
     });
-    var html = document.querySelector("#content").innerHTML;
     $("#download_html").on("click", function() {
+      var html = document.querySelector("#content").innerHTML;
     	var blob = new Blob([html], { type: "text/html" });
     	this.href = window.URL.createObjectURL(blob);
       this.download = titleForm.val() + ".html";
