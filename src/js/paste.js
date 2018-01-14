@@ -16,16 +16,12 @@
         });
   }
 
-  chrome.runtime.onMessage.addListener(function(data) {
-    if (data.method !== "paste") {
-      return;
-    }
-
-    document.title = "Clipping: " + data.title;
+  chrome.runtime.sendMessage({ event: "opened" }, function(response) {
+    document.title = "Clipping: " + response.title;
     var titleForm = $("#title_form");
-    titleForm.val(data.title);
+    titleForm.val(response.title);
 
-    document.querySelector("#content").innerHTML = data.value;
+    document.querySelector("#content").innerHTML = response.body;
     $("img").each(function() {
       $(this).on('load', function() {
         replaceToBase64(this);

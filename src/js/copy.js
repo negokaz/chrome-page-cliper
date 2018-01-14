@@ -5,7 +5,7 @@
   textarea.addEventListener("paste", (event) => {
     event.preventDefault();
     var html = event.clipboardData.getData("text/html");
-    chrome.runtime.sendMessage({ method: "copy", value: html, title: title });
+    chrome.runtime.sendMessage({ method: "copy", body: html, title: title });
   });
 	document.body.appendChild(textarea);
 	textarea.select();

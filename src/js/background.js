@@ -21,17 +21,18 @@ function createContextMenu() {
 chrome.runtime.onInstalled.addListener(createContextMenu);
 chrome.runtime.onStartup.addListener(createContextMenu);
 
-chrome.runtime.onMessage.addListener(({method, value, title}) => {
+chrome.runtime.onMessage.addListener(({method, body, title}, sender) => {
 	if (method !== "copy") {
 		return;
-	}
+  }
   chrome.tabs.create({
     "url": chrome.extension.getURL("view/preview.html")
-  });
-  chrome.runtime.onMessage.addListener(({event}) => {
-    if (event !== "opened") {
-      return;
-    }
-    chrome.runtime.sendMessage({ method: "paste", value: value, title: title });
+  }, (tab) => {
+    chrome.runtime.onMessage.addListener(({event}, sender, sendResponse) => {
+      if (sender.tab.id !== tab.id || event !== "opened") {
+        return;
+      }
+      sendResponse({ body: body, title: title });
+    });
   });
 });
