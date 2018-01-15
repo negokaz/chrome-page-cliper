@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Page Cliper",
   "description": "選択領域をシングルページのHTMLとして保存します",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "permissions": [
     "clipboardRead",
     "contextMenus",
