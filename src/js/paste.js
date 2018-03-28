@@ -16,6 +16,10 @@
         });
   }
 
+  function replaceToRelativeLink(baseAbsolutePath, aTag) {
+    $(aTag).attr('href', $(aTag).attr('href').replace(baseAbsolutePath, ''));
+  }
+
   chrome.runtime.sendMessage({ event: "opened" }, function(response) {
     document.title = "Clipping: " + response.title;
     var titleForm = $("#title_form");
@@ -27,6 +31,9 @@
         replaceToBase64(this);
         $(this).off("load");
       });
+    });
+    $('a').each(function () {
+      replaceToRelativeLink(response.url, this);
     });
     $("#download_html").on("click", function() {
       var html = document.querySelector("#content").innerHTML;

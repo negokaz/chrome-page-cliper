@@ -21,7 +21,7 @@ function createContextMenu() {
 chrome.runtime.onInstalled.addListener(createContextMenu);
 chrome.runtime.onStartup.addListener(createContextMenu);
 
-chrome.runtime.onMessage.addListener(({method, body, title}, sender) => {
+chrome.runtime.onMessage.addListener(({method, body, title, url}, sender) => {
 	if (method !== "copy") {
 		return;
   }
@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener(({method, body, title}, sender) => {
       if (sender.tab.id !== tab.id || event !== "opened") {
         return;
       }
-      sendResponse({ body: body, title: title });
+      sendResponse({ body: body, title: title, url: url });
     });
   });
 });

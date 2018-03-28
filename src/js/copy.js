@@ -4,7 +4,12 @@
   var title = document.title;
   textarea.addEventListener("paste", (event) => {
     var html = event.clipboardData.getData("text/html");
-    chrome.runtime.sendMessage({ method: "copy", body: html, title: title });
+    chrome.runtime.sendMessage({
+      method: "copy",
+      body: html,
+      title: title,
+      url: location.protocol + '//' + location.host + location.pathname
+    });
     event.preventDefault();
   });
 	document.body.appendChild(textarea);
